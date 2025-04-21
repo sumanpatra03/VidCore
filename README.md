@@ -32,5 +32,5 @@ Users can drag‑and‑drop to upload videos, view them in grid or list, rename 
 
 1. **Clone the repo**  
    ```bash
-   git clone https://github.com/your-username/vid-app.git
-   cd vid-app
+   git clone https://github.com/sumanpatra03/VidCore.git
+   cd vidcore
