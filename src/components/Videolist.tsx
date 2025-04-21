@@ -14,6 +14,7 @@ import {
   Box,
   Tooltip,
   Snackbar,
+  Avatar,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
@@ -38,7 +39,10 @@ interface VideoListViewProps {
   onVideoUpdate: () => void;
 }
 
-const VideoListView: React.FC<VideoListViewProps> = ({ videos, onVideoUpdate }) => {
+const VideoListView: React.FC<VideoListViewProps> = ({
+  videos,
+  onVideoUpdate,
+}) => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editName, setEditName] = useState("");
   const [page, setPage] = useState(0);
@@ -71,7 +75,9 @@ const VideoListView: React.FC<VideoListViewProps> = ({ videos, onVideoUpdate }) 
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -92,7 +98,14 @@ const VideoListView: React.FC<VideoListViewProps> = ({ videos, onVideoUpdate }) 
           <Table stickyHeader>
             <TableHead>
               <TableRow sx={{ bgcolor: "#f1f3f5" }}>
-                {["Name", "File Name", "Size", "Upload Date", "Actions"].map((heading) => (
+                {[
+                  "Thumbnail",
+                  "Name",
+                  "File Name",
+                  "Size",
+                  "Upload Date",
+                  "Actions",
+                ].map((heading) => (
                   <TableCell key={heading} sx={{ fontWeight: "bold" }}>
                     {heading}
                   </TableCell>
@@ -114,6 +127,16 @@ const VideoListView: React.FC<VideoListViewProps> = ({ videos, onVideoUpdate }) 
                       },
                     }}
                   >
+                    <TableCell>
+                      <Avatar
+                        variant="rounded"
+                        src={video.thumbnail || "/video-placeholder.jpg"}
+                        alt={video.name}
+                        sx={{ width: 80, height: 45 }}
+                      />
+                      
+                    </TableCell>
+
                     <TableCell>
                       {editingId === video.id ? (
                         <TextField
@@ -139,7 +162,9 @@ const VideoListView: React.FC<VideoListViewProps> = ({ videos, onVideoUpdate }) 
                       )}
                     </TableCell>
 
-                    <TableCell sx={{ color: "#555" }}>{video.fileName}</TableCell>
+                    <TableCell sx={{ color: "#555" }}>
+                      {video.fileName}
+                    </TableCell>
 
                     <TableCell sx={{ color: "#555" }}>
                       {(video.size / (1024 * 1024)).toFixed(2)} MB
@@ -153,7 +178,9 @@ const VideoListView: React.FC<VideoListViewProps> = ({ videos, onVideoUpdate }) 
                       {editingId === video.id ? (
                         <Box>
                           <Tooltip title="Save">
-                            <IconButton onClick={() => handleEditSave(video.id)}>
+                            <IconButton
+                              onClick={() => handleEditSave(video.id)}
+                            >
                               <SaveIcon color="primary" />
                             </IconButton>
                           </Tooltip>
