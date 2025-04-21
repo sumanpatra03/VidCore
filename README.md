@@ -19,7 +19,7 @@ Users can drag‑and‑drop to upload videos, view them in grid or list, rename 
 
 ## 🛠️ Tech Stack
 
-- **Next.js 13+** (App Router)  
+- **Next.js 15+** (App Router)  
 - **TypeScript**  
 - **Material UI** (@mui)  
 - **react‑dropzone** for uploads  
